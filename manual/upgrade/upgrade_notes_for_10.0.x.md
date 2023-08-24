@@ -80,6 +80,18 @@ ENABLED_ROLE_PERMISSIONS = {
 ### ElasticSearch change (pro edition only)
 
 Elasticsearch is upgraded to version 8.x, fixed and improved some issues of file search function.
+Please note that Elasticsearch starting 8.x uses ssl by default which Seafile is not set up to use. Upgrading to 8.x without disabling ssl in elasticsearch will break access to elasticsearch. To fix this, add an environment variable to elastichsearch `xpack.security.enabled` set to `false`
+
+```yaml
+    elasticsearch:
+        container_name: seafilet-elasticsearch
+        environment:
+        - discovery.type=single-node
+        - bootstrap.memory_lock=true
+        - ES_JAVA_OPTS=-Xms1g -Xmx1g -Dlog4j2.formatMsgNoLookups=true
+        - xpack.security.enabled=false
+        image: elasticsearch:8.5.3
+```
 
 Since elasticsearch 7.x, the default number of shards has changed from 5 to 1, because too many index shards will over-occupy system resources; but when a single shard data is too large, it will also reduce search performance. Starting from version 10.0, Seafile supports customizing the number of shards in the configuration file.
 
