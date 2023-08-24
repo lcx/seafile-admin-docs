@@ -82,6 +82,8 @@ For Seafdav, the configuration of Apache is as follows:
 
 ### HTTPS proxy
 
+Please note that this workaround is not needed anymore for as of Seafile 10, see comment in the forum: https://forum.seafile.com/t/seafdav-move-command-causing-502/11582/52
+
 If you configure https in Nginx or Apache, you have to configure the reverse proxy to rewrite the `Destination` headers protocol from `https` to `http`. This is a limitation on the WebDAV framework SeafDAV is based on. See more details:
 
 * <https://forum.seafile.com/t/seafdav-move-command-causing-502/11582>
